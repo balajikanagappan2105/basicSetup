@@ -1,0 +1,55 @@
+import { ObjectState } from './object-state';
+import { Auditor } from './auditor';
+import { ClientAudit } from './client-audit';
+import { Employee } from './employee.model';
+import { Document } from './document';
+import { DocumentTypeRelationshipMap } from './document-type-relationship-map';
+import { SubClient } from './sub-client';
+
+export interface Client {
+  Id: number;
+  Name: string;
+  Logo: string;
+  TollFreeNumber: string;
+  TopicId: number;
+  EnableiVAC: boolean;
+  EnableOCR: boolean;
+  ClientServiceRepId: number;
+  WikiLink: string;
+  ClientSiteUrl: string;
+  IsActive: boolean;
+  EnableiRIS: boolean;
+  CanGoGreen: boolean;
+  EnableiVACUploadDocuments: boolean;
+  EmployeeCriteria1: string;
+  EmployeeCriteria2: string;
+  EmployeeCriteria3: string;
+  EmployeeCriteria4: string;
+  EmployeeCriteria5: string;
+  EmployeeCriteria6: string;
+  EmployeeCriteria7: string;
+  EmployeeCriteria8: string;
+  EmployeeCriteria9: string;
+  EmployeeCriteria10: string;
+  DependentCriteria1: string;
+  DependentCriteria2: string;
+  DependentCriteria3: string;
+  DependentCriteria4: string;
+  DependentCriteria5: string;
+  DependentCriteria6: string;
+  DependentCriteria7: string;
+  DependentCriteria8: string;
+  DependentCriteria9: string;
+  DependentCriteria10: string;
+  AssignedPeriodFrom: Date;
+  AssignedPeriodTo: Date;
+  SpecialInstructions: string;
+  ObjectState: ObjectState;
+  Auditor: Auditor;
+  SubClients: SubClient;
+  ClientAudits: ClientAudit;
+  Employees: Employee;
+  ClientDocuments: Document;
+  DocumentTypeRelationshipMap: DocumentTypeRelationshipMap;
+}
+

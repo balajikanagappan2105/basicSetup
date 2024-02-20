@@ -1,0 +1,74 @@
+<div id="header" class="consova-header">
+    <div class="h-100 mx-0 row justify-content-end justify-content-md-between align-items-center">
+        <div class="col-3 col-sm-5 col-lg-5 d-flex justify-content-start align-items-center">
+            <div class="col-12 px-0 d-flex justify-content-start align-items-center" style="min-width: 300px;">
+                <span id="sidebarCollapse" class="sidebarCollapse-menu" (click)="menuCollapse()"></span>
+
+                <div class="dropdown d-none d-sm-block">
+                    <div class="d-flex align-items-center dropdown-toggle mr-4" data-toggle="dropdown">
+                        <div class="user_image">
+                            <img src="./assets/images/img_profile_border.svg" class="img-fluid" alt="Profile image" />
+                            <img src="./assets/images/img_profile_pic_blank.svg" class="img-fluid userInitial" alt="Profile image" />
+                        </div>
+                        <span class="user_name d-none d-sm-inline-block" role="region" aria-label="loggedName">{{authService.getLoggedInUserFirstName}} {{authService.getLoggedInUserLastName}}</span>
+                    </div>
+
+                    <div class="dropdown-menu">
+                        <button class="dropdown-item topbar-btn" [routerLink]="['/profile']" type="button"><span class="dropdown-btn user_icon"></span> {{'Profile' | translate: 'TopBar'}}</button>
+                        <button *ngIf="enableChangePassword" class="dropdown-item" (click)="showChangePassword()" type="button"><img src="./assets/images/ic_lock_green.svg" class="img-fluid mr-2" alt="Change Password">Change Password</button>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item text-danger topbar-btn" (click)="logout()" type="button"><span class="dropdown-btn logout_icon"></span> {{'Logout' | translate: 'Menu'}}</button>
+                    </div>
+                </div>
+
+                <span *ngIf="elapsedTimeDisplay && elapsedTimeDisplay.length" class="user_name d-inline-flex text-center flex-wrap justify-content-center align-items-center" role="region" aria-label="sessiontime">
+					<small class="d-none d-lg-block w-100 text-nowrap" >{{'SessionTimeout' | translate: 'TopBar'}}</small>
+					<img src="./assets/images/ic_countdown.svg" class="img-fluid mr-2" width="15" alt="Session Timeout">
+					{{elapsedTimeDisplay}}
+				</span>
+
+            </div>
+        </div>
+
+        <div class="col-8 col-sm-6 col-lg-7 d-flex justify-content-end align-items-center" style="padding-right: 4%;" role="region" aria-label="document">
+            <div class="col-12 col-sm-9 px-0 d-flex justify-content-end align-items-center">
+				<span (click)="showVideo = !showVideo" class="upload-button mr-2 mr-sm-4 cursor-pointer">
+					<img src="./assets/images/ic_video_white.svg" class="img-fluid img-playvideo" alt="Play Video">
+					<span class="d-none d-lg-inline-block ml-2" >Play Consova Portal Navigation Video</span>
+				</span>
+                <button type="button" class="upload-button mr-2 mr-sm-4" (click)="uploadDocument()" *ngIf="authService.getEnableUploadDocuments">
+					<img src="./assets/images/ic_upload_document.svg" class="img-fluid img-uploaddocument" alt="" />
+					<span class="d-none d-lg-inline-block ml-2">{{'UploadFile' | translate: 'TopBar'}}</span>
+				</button>
+                <div class="mr-0 mr-sm-4">
+                    <app-language-preference *ngIf="!refreshLanguageDropdown" [onChange]="true" [isFromProfile]="false"></app-language-preference>
+                </div>
+            </div>
+
+            <div class="px-0 d-none d-sm-flex justify-content-end align-items-right mr-2 mr-sm-4"> {{notificationCount | json}}
+                <img class="img-rounded img-fluid" style="max-height: 45px;" *ngIf="base64DataContent" [src]="base64DataContent" alt="empprofile" />
+
+            </div>
+            <div class="px-0 d-sm-flex justify-content-end align-items-right notification cursor-pointer">
+				<span (click)="op1.toggle($event); notificationIconClick()" (focusout)="op1.hide()" pTooltip="Notifications" tooltipPosition="top" tooltipStyleClass="tooltipnotify"><img src="./assets/images/notification.svg" class="img-fluid img-notifcation" alt=""  />
+					<sup class="notify" *ngIf="isshownotificationCount"><span class="notifycount" >{{notificationCount}}</span></sup>
+                </span>
+                <p-overlayPanel #op1 [showCloseIcon]="false" [dismissable]="true" styleClass="notification-overlay">
+                    <app-notification (showNotification)="showNotificaionCount()"></app-notification>
+                </p-overlayPanel>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-dialog [(visible)]="changepassword" [modal]="true" styleClass="col-12 col-md-7 col-lg-6 col-sm-4 col-xl-3 no-header loginscreenlist changePasswordheader" [minY]="70" [baseZIndex]="10000" [focusOnShow]="false" (onHide)="changePasswordDialogOnHide()"
+    [closable]="false" [style]="{width: '390px'}">
+    <app-change-password (closePopup)="hideChangePassword()"></app-change-password>
+</p-dialog>
+
+<p-dialog header="Consova Demo" [(visible)]="showVideo" [modal]="true" styleClass="col-12 col-md-8 col-lg-8 col-sm-4 col-xl-8" [minY]="70" [baseZIndex]="100000" [focusOnShow]="false"
+    [closable]="true">
+    <video width="100%" controls>
+		<source src="../../../../assets/videos/Consova_QuickDemo.mp4" type="video/mp4">
+	</video>
+</p-dialog>

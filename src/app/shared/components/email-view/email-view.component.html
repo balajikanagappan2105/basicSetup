@@ -1,0 +1,37 @@
+<div id="divEmailContainer" style="width: 100%; color: #000 !important;">
+    <div class="mt-4">
+        <div class="pull-right no-print">
+            <span class="cursor-pointer my-2 mx-3" (click)="downloadEmail($event)">
+				<img src="./assets/images/ic_doc_download_h.svg" class="img-fluid" alt="download">
+			</span>
+            <span class="cursor-pointer my-2 mx-2 text-primary f-20" (click)="printEmail($event)">
+				<img src="./assets/images/ic_doc_print_h.svg" class="img-fluid" alt="print">
+			</span>
+        </div>
+
+        <div class="px-0" style="width: calc(100% - 50px)">
+            <p class="mb-2"><span class="emailLabel">From</span> {{emailSource.FromAddress}}</p>
+            <p class="mb-2"><span class="emailLabel">To</span> {{emailSource.ToAddress}}</p>
+            <p class="mb-2"><span class="dateStyle"> {{emailSource.SentDate | date: 'EEEE, MMMM d, y, hh:mm:ss a' }}</span></p>
+        </div>
+    </div>
+    <div class="subjectStyle">
+        <p class="px-0 my-2"><span class="emailLabel">Subject</span> {{emailSource.Subject}}</p>
+    </div>
+    <div class="d-block f-14">
+        <div class="px-2 py-2 html-body-container">
+            <iframe [srcdoc]="emailSource.HtmlBody | secureByPass: 'html'" height="400px" width="100%"></iframe>
+        </div>
+    </div>
+</div>
+
+<div id="divEmailPrintableContentContainer" class="print-container hide"></div>
+
+<embed *ngIf="pdfObjectURI" id="embedPDFPrintElement" [src]="pdfObjectURI | secureByPass: 'resourceUrl'" class="embed-pdf-print" frameborder="0">
+
+<app-print-view *ngIf="showPortal">
+    <div [innerHTML]="emailPrintHTML | secureByPass: 'html'"></div>
+    <button id="closePrintView" (click)="showPortal = false;" class="no=print" style="visibility: hidden;">Close</button>
+</app-print-view>
+
+<app-loader *ngIf="showLoader"></app-loader>

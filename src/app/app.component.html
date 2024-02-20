@@ -1,0 +1,16 @@
+<router-outlet></router-outlet>
+
+<p-dialog header="" styleClass="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3" [(visible)]="sessionDialog.Visibile" [modal]="true" [blockScroll]="true" [resizable]="false" [draggable]="false" [responsive]="true" [focusOnShow]="false" [closable]="false" [minY]="70" [baseZIndex]="10000" (onHide)="onSessionDialogClose()">
+	<div class="text-center f-18">
+		<h3 class="mb-4">Need More Time?</h3>
+		<p>Your session is about to expire.</p>
+		<p>You will be automatically signed out in</p>
+		<h6>{{sessionRemainingDuration}}</h6>
+		<p>To continue your session, select <b>Stay Signed In</b>.</p>
+
+		<p-footer>
+			<button type="button" class="btn btn-idle mr-4" (click)="onSessionConfirmation($event, false)">Sign out</button>
+			<button type="button" class="btn btn-primary" (click)="onSessionConfirmation($event, true)">Stay Signed In</button>
+		</p-footer>
+	</div>
+</p-dialog>

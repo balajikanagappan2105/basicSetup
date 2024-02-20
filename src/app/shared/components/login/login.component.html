@@ -1,0 +1,738 @@
+<!-- <div class="container-fluid">
+	<div class="h-100vh">
+		<div class="row align-items-center justify-content-between emp-login-top">
+			<h1 class="col-8 col-sm-4 col-lg-4"><i class="fa fa-user mr-1"></i> {{'EmployeeLogin' | translate : 'Login'}}</h1>
+		</div>
+
+		<div class="row justify-content-center align-items-center login-section">
+			<div class="col-10 col-sm-6 col-lg-3">
+				<div class="card mx-auto">
+					<div class="card-body">
+						<div class="text-center mb-3">
+							<img src="./assets/images/consova_logo.png" alt="Consova" class="img-fluid">
+						</div>
+
+						<p class="text-center">{{'Signin' | translate : 'Login'}}</p>
+
+						<form class="form login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="off">
+							<div class="form-group mb-3">
+								<div class="row mx-0 align-items-center">
+									<input tabindex="1" type="text" class="form-control custom-field" autocomplete="false" pInputText pKeyFilter="alpha" [placeholder]="'Lastname' | translate: 'Login'" formControlName="LastName" autofocus>
+									<i class="fa fa-info-circle fa-lg" data-toggle="tooltip" data-placement="top" title="Input last name and suffix as it appears on the letter received."></i>
+								</div>
+							</div>
+
+							<div class="form-group mb-3">
+								<div class="d-flex align-items-center">
+									<input tabindex="2" type="password" class="form-control custom-field" pInputText pKeyFilter="pnum" [placeholder]="'ConsovaPIN' | translate: 'Login'" formControlName="ConsovaPIN">
+									<i class="fa fa-info-circle fa-lg" data-toggle="tooltip" data-placement="top" title="Input the PIN number found at the bottom left hand corner of the letter received."></i>
+								</div>
+							</div>
+
+							<div class="form-group mb-3">
+								<div class="d-flex align-items-center">
+									<input tabindex="3" type="password" maxlength="4" class="form-control custom-field" pInputText pKeyFilter="pnum" [placeholder]="'EmployeeSSN' | translate: 'Login'" formControlName="EmployeeSSN">
+									<i class="fa fa-info-circle fa-lg" data-toggle="tooltip" data-placement="top" title="Input the last 4 digits of your Social Security Number."></i>
+								</div>
+							</div>
+
+							<button class="btn btn-block btn-primary" [disabled]="loginForm.invalid" tabindex="4">{{'Login' | translate: 'Login'}}</button>
+						</form>
+
+						<div class="d-flex flex-column pt-3">
+							<a href="" class="mb-1" tabindex="5" target="_blank" [routerLink]="['/privacypolicy']" routerLinkActive="active-link">{{'PrivacyPolicy' | translate: 'Login'}}</a>
+							<a href="http://www.thawte.com/products/" class="" target="_blank" tabindex="6">{{'AboutSSLCertificates' | translate: 'Login'}}</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->
+
+<!-- <div class="row mx-0 h-100 justify-content-center align-items-center" *ngIf="!showLoginPage">
+	<div class="col-12 col-md-3 mx-auto">
+		<div class="sectionTopbar"></div>
+		<div class="sticky-section pt-4">
+			<img src="./assets/images/consova_logo.png" class="d-block img-fluid mx-auto mb-4" alt="Consova">
+			<div class="justify-content-center align-items-center f-18">Please wait while we redirecting to your dashboard ....</div>
+		</div>
+	</div>
+</div> -->
+
+<div class="row mx-0 h-100 justify-conten-center align-items-center" *ngIf="showLoginPage" role="heading" aria-level="1" aria-label="Login">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-3 mx-auto">
+        <img src="./assets/images/consova_logo.png" class="d-block img-fluid mx-auto mb-4" alt="Consova">
+        <div class="sectionTopbar"></div>
+        <div class="sticky-section pt-4">
+            <h2 class="mb-4" role="region" aria-label="heading">{{'Signin' | translate : 'Login'}}</h2>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" [autocomplete]="entryPloicyAutocompleteForm">
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><img src="../../assets/images/ic_emailuser.svg" alt="UserName"></span>
+                        </div>
+                        <input type="text" id="username" aria-label="User Name" class="input form-control" formControlName="Username" placeholder="User Name" maxlength="255" autocomplete="off" autofocus>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+								<img src="./assets/images/ic_password_input_field.svg" alt="Password">
+							</span>
+
+                        </div>
+
+                        <div class="input-group-prepend" style="right: 0">
+							<span class="input-group-text">
+								<!-- <img src="./assets/images/ic_view.svg" alt="Password"> -->
+								<i *ngIf="loginForm.get('Password').value != '' " [ngClass]="showLoginFormPassword ? 'fa fa-eye-slash' : 'fa fa-eye'" style="cursor:pointer"  (click)="showLoginFormPassword = !showLoginFormPassword"></i>
+							</span>
+
+                        </div>
+
+                        <input [type]="showLoginFormPassword ? 'text' : 'password'" aria-label="Password" class="input form-control" formControlName="Password" placeholder="Password" maxlength="255" id="password" autocomplete="off">
+
+                    </div>
+                </div>
+                <div class="form-group">
+					<div class="text-center" role="region" aria-label="Weather"> <!--added by Rahul-->
+                        <button type="submit" class="btn btn-primary btn-block f-20 py-2" [disabled]="loginForm.invalid">Log In</button>
+                    </div>
+                </div>
+            </form>
+
+            <p class="d-flex justify-content-between" role="region" aria-label="Password">
+                <span tabindex="0" class="forgot-link" (click)="forgotPasswordDialogVisibility = !forgotPasswordDialogVisibility"><i class="fa fa-lock"></i> Forgot Password?</span>
+				<span (click)="showForgetPasswordVideo = !showForgetPasswordVideo" class="upload-button cursor-pointer" pTooltip="Play Forgot Password or Forgot Username Video" tooltipPosition="bottom">
+					<img src="../../../../assets/images/ic_video_4.svg" class="img-fluid forgot-link-img" alt="Play Video">
+					<!-- <span class="d-none d-lg-inline-block ml-2" >Play Consova Portal Navigation Video</span> -->
+				</span>
+                <span tabindex="0" class="forgot-link" (click)="forgotUserDialogVisibility = !forgotUserDialogVisibility"><i class="fa fa-user"></i> Forgot
+					Username?</span>
+            </p>
+            <!-- <p class="d-flex justify-content-center">
+                <a class="forgot-link" href="https://consova.com/privacy-policy/" target="blank" role="region" aria-label="Privacy">Privacy Policy</a>
+            </p> -->
+            <p class="d-flex justify-content-center" role="region" aria-label="text">
+                <span class="forgot-link" style="cursor:default">If you have not already created an account please create account here.</span>
+                <!-- <span class="cursor-pointer" (click)="showFirstTimeUser()" style="text-decoration: underline">Create Account</span> -->
+            </p>
+
+            <p class="d-flex justify-content-center mb-1" role="region" aria-label="text">
+                <span class="forgot-link cursor-pointer f-20" (click)="showFirstTimeUser()" style="text-decoration: underline">Create Account</span>
+
+            </p>
+			<p class="d-flex justify-content-center" role="region" aria-label="text">
+				<span (click)="showCreateAccountVideo = !showCreateAccountVideo" class="upload-button cursor-pointer" pTooltip="Play Create Account Video" tooltipPosition="bottom">
+					<img src="../../../../assets/images/ic_video_4.svg" class="img-fluid forgot-link-img mt-1" alt="Play Video">
+					<!-- <span class="d-none d-lg-inline-block ml-2" >Play Consova Portal Navigation Video</span> -->
+				</span>
+			</p>
+        </div>
+    </div>
+
+    <app-loader *ngIf="showLoader || !showLoginPage"></app-loader>
+</div>
+
+
+<!-- <div class="row mx-0 h-100 justify-content-center align-items-center" *ngIf="showLoginPage" role="heading" aria-level="1">
+    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 mx-auto">
+        <img src="./assets/images/consova_logo.png" class="d-block img-fluid mx-auto mb-4" alt="Consova">
+        <div class="sectionTopbar"></div>
+        <div class="sticky-section pt-4">
+            <h2 class="mb-4" role="region" aria-label="heading">{{'Signin' | translate : 'Login'}}</h2>
+
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" [autocomplete]="entryPloicyAutocompleteForm">
+
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <input type="text" id="LastName" class="input form-control" pInputText [placeholder]="'Lastname' | translate: 'Login'" formControlName="LastName" autofocus autocomplete="off">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-info-circle fa-lg cursor-pointer" pTooltip="Enter your last name as it appears on the letter or email you received from Consova."></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <input type="password" id="ConsovaPIN" class="input form-control" pInputText pKeyFilter="pnum" [placeholder]="'ConsovaPIN' | translate: 'Login'" formControlName="ConsovaPIN" autocomplete="off">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-info-circle fa-lg cursor-pointer" pTooltip="Enter the PIN found in the letter or email you received from Consova."></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <input type="password" id="EmployeeSSN" class="input form-control" pInputText pKeyFilter="pnum" [placeholder]="'EmployeeSSN' | translate: 'Login'" formControlName="EmployeeSSN" maxlength="4" autocomplete="off">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-info-circle fa-lg cursor-pointer" pTooltip="Enter the last 4 digits of your Social Security Number."></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-block f-20 py-2" [disabled]="loginForm.invalid">{{'Login' | translate: 'Login'}}</button>
+                    </div>
+                </div>
+            </form>
+
+            <p class="d-flex justify-content-center">
+                <a class="forgot-link" href="https://consova.com/privacy-policy/" target="blank" role="region" aria-label="Privacy">Privacy Policy</a>
+            </p>
+        </div>
+    </div>
+</div> -->
+
+
+<p-dialog header="Authentication" styleClass="col-lg-3 col-md-6 col-sm-6 col-12 top-15" [(visible)]="modalMessageUser.Visibility" [modal]="true" [blockScroll]="true" [resizable]="false" [draggable]="false" [responsive]="true" [focusOnShow]="false" [minY]="70"
+    [baseZIndex]="10000" [closable]="false">
+    <div class="sticky-section f-18 text-center">
+        <div *ngIf="modalMessageUser.CSSClass == 'text-danger'">
+            <p><img src="./assets/images/ic_error.svg" class="img-fluid" alt="Passcode"></p>
+            <div [innerHTML]="modalMessageUser.Message" class="text-danger mb-3 py-3"></div>
+        </div>
+
+        <div class="text-center">
+            <button type="button" class="btn btn-primary f-20 py-2" (click)="closeAuthUser(); returndataentrypage()">OK</button>
+        </div>
+    </div>
+</p-dialog>
+
+<p-dialog header="Authentication" styleClass="col-lg-3 col-md-6 col-sm-6 col-12 dialog no-header loginscreenlist top-15" [(visible)]="modalMessageRestPwd.Visibility" [modal]="true" [blockScroll]="true" [resizable]="false" [draggable]="false" [responsive]="true"
+    [focusOnShow]="false" [minY]="70" [baseZIndex]="10000" [closable]="false">
+    <div class="sticky-section f-18 text-center">
+        <div *ngIf="modalMessageRestPwd.CSSClass == 'text-danger'">
+            <p><img src="./assets/images/ic_error.svg" class="img-fluid" alt="Passcode"></p>
+            <div [innerHTML]="modalMessageRestPwd.Message" class="text-danger mb-3 py-3"></div>
+        </div>
+
+        <div class="text-center">
+            <button type="button" class="btn btn-primary f-20 py-2" (click)="closeAuthResetPwd();">OK</button>
+        </div>
+    </div>
+</p-dialog>
+<!-- <app-loader *ngIf="showLoader || !showLoginPage"></app-loader> -->
+<p-dialog header="Authentication" styleClass="col-lg-3 col-md-6 col-sm-6 col-12 top-15" [(visible)]="modalMessage.Visibility" [modal]="true" [blockScroll]="true" [resizable]="false" [draggable]="false" [responsive]="true" [focusOnShow]="false" [minY]="70" [baseZIndex]="10000"
+    [closable]="false">
+    <div class="sticky-section f-18 text-center">
+        <div *ngIf="modalMessage.CSSClass == 'text-danger'">
+            <p><img src="./assets/images/ic_error.svg" class="img-fluid" alt="Passcode"></p>
+            <div [innerHTML]="modalMessage.Message" class="text-danger mb-3 py-3" [ngClass]="modalMessage.CSSClass"></div>
+        </div>
+
+        <div class="text-center">
+            <button type="button" class="btn btn-primary f-20 py-2" (click)="returnsign()">Return to Sign In</button>
+        </div>
+    </div>
+
+    <!-- <div class="py-3 px-3" [ngClass]="modalMessage.CSSClass" [innerHTML]="modalMessage.Message"></div>
+    <p-footer>
+        <button type="button" class="btn btn-primary py-1 f-14" style="min-width: auto;" (click)="modalMessage.Visibility = false">OK</button>
+    </p-footer> -->
+</p-dialog>
+<p-confirmDialog #cd header="Confirmation" styleClass="no-close" [style]="{width: '250px'}">
+    <p-footer>
+        <div class="d-flex align-items-center justify-content-between">
+            <button type="button " class="btn btn-primary" style="min-width: 70px !important; " (click)="cd.accept() ">OK</button>
+        </div>
+        <!-- <button type="button " class="btn btn-accept ml-3 " (click)="cd1.accept() ">Yes1</button> -->
+    </p-footer>
+</p-confirmDialog>
+
+<!-- Forget Password -->
+
+<p-dialog header="Forgot Password" styleClass="col-12 col-md-8 col-lg-6 col-xl-3 dialog no-header loginscreenlist top-15" [(visible)]="forgotPasswordDialogVisibility" [modal]="true" [baseZIndex]="10000" [focusOnShow]="false" [closable]="false" [draggable]="false">
+		<app-forgot-password *ngIf="forgotPasswordDialogVisibility" (forgotUserPassword)="forgotPassword($event)" (onClosePopup)="closeForgetPassword()"></app-forgot-password>
+    	<app-loader *ngIf="showforgetLoader"></app-loader>
+</p-dialog>
+
+<!-- Forget UserName -->
+
+<p-dialog header="Forgot Username" styleClass="col-12 col-md-7 col-lg-6 col-xl-3 dialog no-header loginscreenlist top-15" [(visible)]="forgotUserDialogVisibility" [modal]="true" [minY]="70" [baseZIndex]="1000" [focusOnShow]="true" [closable]="true" [draggable]="false">
+    <app-forgotuser (backToLogin)="closeForgetUsername()"></app-forgotuser>
+</p-dialog>
+
+<div class="row mx-0 h-100 justify-conten-center align-items-center" role="heading" aria-level="1" *ngIf="showFirstTimeRegister" aria-label="Account creation">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-3 mx-auto">
+        <img src="./assets/images/consova_logo.png" class="d-block img-fluid mx-auto mb-4" alt="Consova">
+        <div class="sectionTopbar"></div>
+        <div class="sticky-section pt-4 app-user">
+            <h2 class="mb-4" role="region" aria-label="heading">Account Creation</h2>
+
+            <form [formGroup]="loginFormregister" (ngSubmit)="onSubmitUser()" [autocomplete]="entryPloicyAutocompleteForm">
+
+                <div class="form-group">
+                    <!-- <label for="LastName">{{'Lastname' | translate: 'Login'}}</label> -->
+                    <div class="input-group mb-3">
+                        <input type="text" id="LastName" aria-label="Last Name" class="input form-control" pInputText [placeholder]="'Lastname' | translate: 'Login'" formControlName="LastName" autofocus autocomplete="off">
+                        <div class="input-group-prepend dm-sm-none">
+                            <span class="input-group-text"><i class="fa fa-info-circle fa-lg cursor-pointer" pTooltip="Enter your last name as it appears on the letter or email you received from Consova." [tooltipZIndex]="100000" ></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group d-flex align-items-baseline mb-2">
+                    <!-- <label for="ConsovaPIN">{{'ConsovaPIN' | translate: 'Login'}}</label> -->
+                    <div class="input-group mb-3">
+                        <input type="password" id="ConsovaPIN" aria-label="Consova PIN" class="input form-control" pInputText pKeyFilter="pnum" [placeholder]="'ConsovaPIN' | translate: 'Login'" formControlName="ConsovaPIN" autocomplete="off">
+                        <div class="input-group-prepend dm-sm-none">
+                            <span class="input-group-text"><i class="fa fa-info-circle fa-lg cursor-pointer" pTooltip="Enter the PIN found in the letter or email you received from Consova." [tooltipZIndex]="100000"></i></span>
+                        </div>
+
+                    </div>
+					<div class="">
+						<span (click)="showPINVideo = !showPINVideo" class="cursor-pointer" pTooltip="Play Locating Your PIN Video" tooltipPosition="bottom">
+							<img src="../../../../assets/images/ic_video_4.svg" class="img-fluid mb-1 mt-1 mx-2" width="22" alt="Play Video">
+							<!-- <span class="d-none d-lg-inline-block ml-2" >Play Consova Portal Navigation Video</span> -->
+						</span>
+					</div>
+                </div>
+
+                <div class="form-group">
+                    <!-- <label for="EmployeeSSN">{{'EmployeeSSN' | translate: 'Login'}}</label> -->
+                    <div class="input-group mb-3">
+                        <input type="password" id="EmployeeSSN" aria-label="Employee SSN" class="input form-control" pInputText pKeyFilter="pnum" [placeholder]="'EmployeeSSN' | translate: 'Login'" formControlName="EmployeeSSN" maxlength="4" autocomplete="off">
+                        <div class="input-group-prepend dm-sm-none">
+                            <span class="input-group-text"><i class="fa fa-info-circle fa-lg cursor-pointer" pTooltip="Enter the last 4 digits of your Social Security Number." [tooltipZIndex]="100000"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-block f-20 py-2" [disabled]="loginFormregister.invalid">{{'Submit' | translate: 'Contact'}}</button>
+                        <!-- <button type="submit" class="btn btn-primary btn-block f-20 py-2" (click)="showDataEntry()">data entry</button> -->
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <app-loader *ngIf="showAccountCreationLoader"></app-loader>
+</div>
+<!--Data Entry Model -->
+
+<!-- <p-dialog header="Data Entry" styleClass="col-12 col-md-7 col-lg-6 col-xl-4 dialog no-header loginscreenlist" [(visible)]="ShowDataEntryDialog" [modal]="true" [blockScroll]="true" [resizable]="false" [draggable]="true" [responsive]="true" [focusOnShow]="false"
+    [minY]="70" [baseZIndex]="10000" [closable]="false"> -->
+<div class="row mx-0 h-100 justify-conten-center align-items-center"  *ngIf="ShowDataEntryDialog" role="heading" aria-level="1">
+    <div class="mx-auto col-12 col-xl-4 col-md-7 col-sm-6 col-xs-12" role="region" aria-label="Email">
+        <img src="./assets/images/consova_logo.png" class="d-block img-fluid mx-auto mb-4" alt="Consova">
+        <div class="sectionTopbar"></div>
+        <div class="sticky-section pt-4">
+            <h2 class="mb-4" role="region" aria-label="heading">Email Verification</h2>
+
+            <div class="">
+                <p class="mb-0">Enter Email (ID For Communication)</p>
+                <form [formGroup]="loginFormOtp" autocomplete="off">
+
+                    <div class="form-group">
+                        <div class="input-group mb-3" style="display: flex; align-items: center !important">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                            <!-- <img src="./assets/images/ic_password_input_field.svg" alt="Password"> -->
+                            <img src="../../assets/images/ic_emailuser.svg" alt="Email">
+                        </span>
+                            </div>
+                            <!-- <input type="email" class="form-control" name="email" #email="ngModel" id="emailAddress" autocomplete="off" autofocus required formControlName="emailAddress" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Enter Email"> -->
+                            <ng-container *ngIf="leftTime != 0 else resendemail">
+                                <div class="col-7 pl-0 pr-3">
+                                    <input type="text" id="emailAddress" aria-label="Email Address" class="input form-control" (input)="texttrim($event.target.value)" [readonly]="!isValidEmailId" formControlName="emailAddress" placeholder="Enter Email" autocomplete="off" autofocus>
+                                </div>
+                            </ng-container>
+                            <ng-template #resendemail>
+                                <div class="col-7 pl-0 pr-3">
+                                    <input type="text" id="emailAddress" aria-label="Email Address" class="input form-control" (input)="texttrim($event.target.value)" [readonly]="!isValidEmailId" formControlName="emailAddress" placeholder="Enter Email" autocomplete="off" autofocus>
+                                </div>
+                            </ng-template>
+                            <div class="col-5 px-0">
+                                <button class="btn btn-outline-primary" type="button" [disabled]="!validateCommEmail()" (click)="sendEmailOtp()" style="width: calc(100% - 0px);padding-left: 3px; padding-right: 2px;">{{sendOTPText}}</button>
+                            </div>
+							<div>
+								<span *ngIf=" loginFormOtp.get('emailAddress').value != '' && loginFormOtp.get('emailAddress').invalid"> Invalid Email Id : </span>
+								<span [ngClass]="loginFormOtp.get('emailAddress').invalid ? 'text-danger' : 'text-success'">{{ loginFormOtp.get('emailAddress').value }} </span>
+							</div>
+                        </div>
+                        <!-- <div class="d-flex align-items-center justify-content-center">
+                        <button class="btn btn-outline-primary" type="button" [disabled]="!validateCommEmail()" (click)="sendEmailOtp()">{{sendOTPText}}</button>
+                    </div> -->
+                    </div>
+
+                    <!-- <div class="input-group-prepend">
+                    <span class="mb-3">
+						{{emailsendresponse}}
+					</span>
+                </div> -->
+                    <div class="form-group">
+                        <div *ngIf="showGoGreen" class="d-flex">
+
+                            <!-- <input type="checkbox" formControlName="greenCheckbox" class="consova-checkbox" [disabled]="!validateCommEmail()" value="checked" style="top:7px"> -->
+                            <input type="checkbox" formControlName="greenCheckbox" class="consova-checkbox mt-1" disabled="true" value="checked" checked>
+                            <div class="ml-4">Please provide a valid email address to receive important notifications about your verification.</div>
+                            <!-- <div class="ml-4">Sign up for Go Green to receive notifications in your email when you have a new communication from Consova to view of download</div> -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group mb-3" style="display: flex; align-items: center !important">
+                            <div class="input-group-prepend">
+                                <span class="my-2">
+                            <!-- <img src="./assets/images/ic_password_input_field.svg" alt="Password"> -->
+                        </span>
+                            </div>
+                            <!-- <input type="password" id="opt" class="input form-control" pInputText pKeyFilter="pnum" placeholder="Enter OTP" formControlName="opt" maxlength="4" autocomplete="off"> -->
+                            <div class="col-7 pl-0 pr-3">
+                                <input type="text" aria-label="Enter Authentication Code" class="input form-control" pInputText pKeyFilter="pnum" formControlName="emailOtp" placeholder="Enter Authentication Code" maxlength="6" id="opt" autocomplete="off" style="padding: 10px !important" (keyup)="validateCommEmailOTP()" (paste)="paseteEmailOTP($event)">
+                            </div>
+                            <div class="col-5 px-0">
+                                <button class="btn btn-outline-primary" type="button" [disabled]="!isValidEmailOTP" (click)="verifyemailOtp()" style="width: calc(100% - 0px);padding-left: 3px; padding-right: 2px;">Verify Authentication Code</button>
+                            </div>
+                        </div>
+                        <div>
+
+                            <span class="font-weight-bold">Resend Authentication Code</span>
+                            <span> in</span>
+                            <span class="ml-2">{{startTimeCounter}}</span>
+
+                        </div>
+                        <!-- <div class="d-flex align-items-center justify-content-center mt-3">
+                        <button class="btn btn-outline-primary" type="button" [disabled]="!isValidEmailOTP" (click)="verifyemailOtp()">Verify OTP</button>
+                    </div> -->
+                        <!-- <div class="input-group-prepend">
+                        <span class="mb-3 text-center mt-2">
+							{{emailverifyresponse}}
+						</span>
+                    </div> -->
+                        <!-- <div class="form-group mt-3" *ngIf="emailverifyresponse">
+                        <div class="col-12 d-flex px-0 alert alert-danger">
+                            <span class="pl-2">{{ emailverifyresponse }}</span>
+                        </div>
+                    </div> -->
+                        <!-- </div> -->
+                        <!-- <div class="form-group">
+                    <span class="font-weight-bold">Resend OTP
+                    </span>
+                    <span>in</span>
+                </div> -->
+                    </div>
+
+                    <!-- <div class="form-group">
+                    <div class="d-flex w-100 justify-content-center align-items-center ml-2">
+                        <button type="button" class="btn btn-outline-primary f-16 mr-md-2" [disabled]="!isEmailOTPVerfied" (click)="showMobileDataEntry()">Next</button>
+                    </div>
+                </div> -->
+                </form>
+            </div>
+
+			<div class="form-group py-0" *ngIf="emailsuccessmessage || emailerrormessage || emailfailuremessage">
+                <div class="col-12 d-flex px-0 alert py-0 align-items-center justify-content-center" style="font-size: 16px;font-weight: 700;padding: 0px;">
+                    <span *ngIf="emailsuccessmessage" class="pl-2 text-success">{{ emailsuccessmessage }}</span>
+                    <span *ngIf="emailerrormessage" class="pl-2 text-danger">{{ emailerrormessage }}</span>
+                    <span *ngIf="emailfailuremessage" class="pl-2 text-danger">{{ emailfailuremessage }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-loader *ngIf="showEmailVerificationLoader"></app-loader>
+</div>
+<!-- </p-dialog> -->
+
+<!-- <p-dialog header="Data Entry" styleClass="col-12 col-md-7 col-lg-6 col-xl-4 dialog no-header loginscreenlist" [(visible)]="ShowMobileEntryDialog" [modal]="true" [blockScroll]="true" [resizable]="false" [draggable]="true" [responsive]="true" [focusOnShow]="false"
+    [minY]="70" [baseZIndex]="10000" [closable]="false"> -->
+<div class="row mx-0 h-100 justify-conten-center align-items-center" *ngIf="ShowMobileEntryDialog" role="heading" aria-level="1">
+    <div class="mx-auto col-12 col-xl-4 col-md-7 col-sm-6 col-xs-12" role="region" aria-label="Sms">
+        <img src="./assets/images/consova_logo.png" class="d-block img-fluid mx-auto mb-4" alt="Consova">
+        <div class="sectionTopbar"></div>
+        <div class="sticky-section pt-4 app-user">
+            <h2 class="mb-4" role="region" aria-label="heading">SMS Verification</h2>
+
+            <div class="">
+                <p class="mb-0" for="EnterMobileNumber">Enter Mobile Number</p>
+                <form [formGroup]="loginFormMobileOtp" autocomplete="off">
+
+                    <div class="form-group">
+                        <div class="mobiledevice">
+                            <div class="input-group-prepend">
+                                <span class="my-2">
+									</span>
+                            </div>
+                            <ng-container *ngIf="mobileOtpleftTime != 0 else resendmobile">
+								<!-- <span id="phone">Phone</span> -->
+                                <div class="col-auto pl-0 pr-3 mobiledevice showsmswidth">
+                                    <p-inputMask mask="(999) 999-9999" id="MobileNumber" aria-label="MobileNumber" aria-labelledby="phone" aria-required placeholder="(999) 999-9999" [disabled]="isBypassMobileNumber" [readonly]="isMobileOTPSent" characterPattern="^\\d{5}(-\\d{4})?$" (keyup)="changeField()" styleClass="form-control my-1" formControlName="MobileNumber"
+                                        name="phone"></p-inputMask>
+                                </div>
+                            </ng-container>
+                            <ng-template #resendmobile>
+                                <div class="col-auto pl-0 pr-3 mobiledevice showotpwidth">
+									<p-inputMask mask="(999) 999-9999" id="MobileNumber" aria-label="MobileNumber" placeholder="(999) 999-9999" [disabled]="isBypassMobileNumber" [readonly]="isMobileOTPSent" characterPattern="^\\d{5}(-\\d{4})?$" (onBlur)="changeField()" (onFocus)="changeField()" (keyup)="changeField()" styleClass="form-control my-1" formControlName="MobileNumber"
+									name="phone"></p-inputMask>
+                                </div>
+                            </ng-template>
+
+                            <div class="col-auto px-0  ">
+								<button class="btn btn-outline-primary showsmscode" type="button" [disabled]="enableMobileOTPButton" (click)="sendMobileOtp()">{{sendMobileOTPText}}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="d-flex">
+                            <input type="checkbox" aria-label="Bypass Mobile Number validation" formControlName="bypassMobileCheckbox" (click)="bypassMobileNumber()" class="consova-checkbox mt-1" value="checked">
+                            <div class="ml-4">Bypass Mobile Number registration - bypassing Mobile Number entry means that you will not receive any reminder texts that your employer may have sent out</div>
+
+                        </div>
+                    </div>
+                    <div *ngIf="isBypassMobileNumber" class="form-group mb-0">
+                        <div class="d-flex w-100 justify-content-center align-items-center ml-2 mb-0">
+                            <button type="button" class="btn btn-outline-primary f-16 mr-md-2" (click)="updateUserDetails()">Next</button>
+                        </div>
+                    </div>
+                    <!-- <div class="input-group-prepend">
+					<span class="my-2">
+						{{mobilesendresponse}}
+					</span>
+				</div> -->
+
+                    <!-- <div class="form-group" *ngIf="mobilesendresponse">
+					<div class="col-12 d-flex px-0 alert alert-danger">
+						<span class="pl-2">{{ mobilesendresponse }}</span>
+					</div>
+				</div> -->
+                    <div *ngIf="!isBypassMobileNumber" class="form-group">
+                        <div class="mobiledevice">
+                            <div class="input-group-prepend">
+                                <span class="mb-3">
+						<!-- <img src="./assets/images/ic_password_input_field.svg" alt="Password"> -->
+									</span>
+                            </div>
+                            <div class="col-auto pl-0 pr-3 mobiledevice showsmswidth">
+                                <input type="text" aria-label="Enter Authentication Code" id="mobileOtp" class="input form-control" pInputText pKeyFilter="pnum" placeholder="Enter Authentication Code" formControlName="mobileOtp" maxlength="6" autocomplete="off" style="padding: 10px !important" (keyup)="validateCommMobileOTP()" (paste)="paseteMobileOTP($event)">
+
+                            </div>
+                            <div class="col-auto px-0 mobiledevice">
+                                <button class="btn btn-outline-primary showverificationcode" type="button" [disabled]="!isValidMobileOTP" (click)="verifyemobileOtp()">Verify Authentication Code</button>
+                            </div>
+                        </div>
+                        <div class="resendauthentication">
+                            <span class="font-weight-bold">Resend Authentication Code
+						</span>
+
+                            <span> in</span>
+                            <span class="ml-2">{{mobileOtpstartTimeCounter}}</span>
+                        </div>
+                        <!-- <div class="col-2 px-0 d-flex align-items-center">
+							<button class="btn btn-outline-primary" type="button" [disabled]="!isValidMobileOTP" (click)="verifyemobileOtp()">Verify OTP</button>
+						</div> -->
+                        <!-- <div class="input-group-prepend">
+						<span class="mb-3 text-center mt-2">
+							{{mobileverifyresponse}}
+						</span>
+					</div> -->
+                        <!-- <div class="form-group" *ngIf="mobileverifyresponse">
+						<div class="col-12 d-flex px-0 alert alert-danger">
+							<span class="pl-2">{{ mobileverifyresponse }}</span>
+						</div>
+					</div> -->
+                    </div>
+                    <!-- <div class="form-group">
+					<div class="d-flex w-100 justify-content-center align-items-center ml-2">
+						<button type="button" class="btn btn-outline-primary f-16 mr-md-2" [disabled]="!isMobileOTPVerfied" (click)="updateUserDetails()">Next</button>
+					</div>
+				</div> -->
+                </form>
+            </div>
+			<div class="form-group py-0" *ngIf="mobilesuccessmessage || mobileerrormessage">
+                <div class="col-12 d-flex px-0 alert py-0 align-items-center justify-content-center" style="font-size: 16px;font-weight: 700;padding: 0px;">
+                    <span *ngIf="mobilesuccessmessage" class="pl-2 text-success">{{ mobilesuccessmessage }}</span>
+                    <span *ngIf="mobileerrormessage" class="pl-2 text-danger">{{ mobileerrormessage }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-loader *ngIf="showMobileVerificationLoader || showLanguageLoader"></app-loader>
+</div>
+<!-- </p-dialog> -->
+
+<!-- <p-dialog header="Account Setup" [(visible)]="showAccountSetup" styleClass="col-12 col-md-7 col-lg-6 col-xl-3 dialog no-header loginscreenlist" [focusOnShow]="false" [modal]="true" [minY]="70" (onHide)="showAccountSetup = false" [closable]="false" [blockScroll]="false"
+    [resizable]="false" [draggable]="true" [responsive]="true" [baseZIndex]="10000"> -->
+<div class="row mx-0 h-100 justify-conten-center align-items-center changePassword" *ngIf="showAccountSetup" role="heading" aria-level="1" role="region" aria-label="Account Setup">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-3 mx-auto">
+        <img src="./assets/images/consova_logo.png" class="d-block img-fluid mx-auto mb-4" alt="Consova">
+        <div class="sectionTopbar"></div>
+        <div class="sticky-section pt-4">
+            <div class="formClass">
+                <h2 class="px-1 mb-4">Account Setup</h2>
+
+                <div class="form-group py-0" *ngIf="accounterrormessage">
+                    <div class="col-12 d-flex px-0 alert py-0">
+                        <!-- <span  *ngIf="emailsuccessmessage" class="pl-2 text-success">{{ emailsuccessmessage }}</span> -->
+                        <span *ngIf="accounterrormessage" class="pl-2 text-danger">{{ accounterrormessage }}</span>
+                    </div>
+                </div>
+
+                <div class="container px-1">
+                    <form [formGroup]="loginFormaccountsetup" (ngSubmit)="createAccount()">
+
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><img src="../../assets/images/ic_emailuser.svg" alt="Username"></span>
+                                </div>
+                                <input type="text" id="username" class="input form-control" formControlName="Username" placeholder="User Name" maxlength="255" autocomplete="off" autofocus>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+								<img src="./assets/images/ic_password_input_field.svg" alt="Password">
+							</span>
+                                </div>
+								<div class="input-group-prepend" style="right: 0">
+									<span class="input-group-text">
+										<!-- <img src="./assets/images/ic_view.svg" alt="Password"> -->
+										<i *ngIf="loginFormaccountsetup.get('Password').value != ''" style="cursor:pointer" [ngClass]="showAccountPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"  (click)="showAccountPassword = !showAccountPassword"></i>
+									</span>
+
+								</div>
+                                <div class="col-12 px-0 py-0">
+                                    <!-- <input type="password" class="form-control" placeholder="Enter Password" [(ngModel)]="Password" (ngModelChange)="Password && Password.length > 0 && ConfirmPassword && ConfirmPassword.length > 0 && comparePwd()" (focus)="opPasswordInfo.show($event,$event.target.value)"
+                                    (focusout)="opPasswordInfo.hide()" (input)="onPasswordTexted($event.target.value)" />
+                                <p-overlayPanel #opPasswordInfo [showCloseIcon]="false" [dismissable]="false" appendTo="body">
+                                    <ul class="mb-0 f-13">
+                                        <li [class]="passwordTooltip.MinCharacter.Style">{{passwordTooltip.MinCharacter.Text}}</li>
+                                        <li [class]="passwordTooltip.UpperCase.Style">{{passwordTooltip.UpperCase.Text}}</li>
+                                        <li [class]="passwordTooltip.LowerCase.Style">{{passwordTooltip.LowerCase.Text}}</li>
+                                        <li [class]="passwordTooltip.Numbers.Style">{{passwordTooltip.Numbers.Text}}</li>
+                                        <li [class]="passwordTooltip.SpecialCharacters.Style">{{passwordTooltip.SpecialCharacters.Text}}</li>
+                                    </ul>
+                                </p-overlayPanel> -->
+
+
+                                    <input  [type]="showAccountPassword ? 'text' : 'password'"  class="form-control" formControlName="Password" maxlength="15" autofocus pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" autocomplete="off" (focus)="opPasswordInfo.show($event)" (input)="onPasswordTexted($event.target.value)"
+                                         (focusout)="opPasswordInfo.hide()" placeholder="Enter Password">
+                                    <p-overlayPanel #opPasswordInfo [showCloseIcon]="false" [dismissable]="false" styleClass="changerestpassword-overlay">
+                                        <ul class="mb-0 f-13">
+                                            <li [class]="passwordTooltip.MinCharacter.Style">{{passwordTooltip.MinCharacter.Text}}</li>
+                                            <li [class]="passwordTooltip.UpperCase.Style">{{passwordTooltip.UpperCase.Text}}</li>
+                                            <li [class]="passwordTooltip.LowerCase.Style">{{passwordTooltip.LowerCase.Text}}</li>
+                                            <li [class]="passwordTooltip.Numbers.Style">{{passwordTooltip.Numbers.Text}}</li>
+                                            <li [class]="passwordTooltip.SpecialCharacters.Style">{{passwordTooltip.SpecialCharacters.Text}}</li>
+                                        </ul>
+                                    </p-overlayPanel>
+
+
+                                </div>
+                                <!-- <input type="password" class="form-control" maxlength="255" formControlName="Password" autofocus pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" autocomplete="new-password" placeholder="Enter Password"> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+								<img src="./assets/images/ic_password_input_field.svg" alt="Password">
+							</span>
+                                </div>
+								<div class="input-group-prepend" style="right: 0">
+									<span class="input-group-text">
+										<!-- <img src="./assets/images/ic_view.svg" alt="Password"> -->
+										<i *ngIf="loginFormaccountsetup.get('ConfirmPassword').value != '' " style="cursor:pointer"  [ngClass]="showAccountConfirmPassword ? 'fa fa-eye-slash' : 'fa fa-eye'" (click)="showAccountConfirmPassword = !showAccountConfirmPassword"></i>
+									</span>
+
+								</div>
+                                <!-- <input type="password" class="form-control" maxlength="255" formControlName="ConfirmPassword" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" autocomplete="new-password" placeholder="Confirm Password"> -->
+
+                                <!-- <input type="password" class="form-control" placeholder="Enter Confirm Password" [(ngModel)]="ConfirmPassword" (ngModelChange)="Password && Password.length > 0 && ConfirmPassword && ConfirmPassword.length > 0 && comparePwd()" /> -->
+
+                                <input [type]="showAccountConfirmPassword ? 'text' : 'password'" class="form-control" formControlName="ConfirmPassword" maxlength="15" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" autocomplete="new-password" placeholder="Enter Confirm Password">
+                            </div>
+                        </div>
+                        <div class="px-0 py-0 mt-1">
+                            <p class="pb-0 mb-2"><strong>Your password must include each of the following:</strong></p>
+                            <!-- </div>
+            <div class="row px-0 py-0 d-flex align-items-center mb-2"> -->
+                            <ul class="px-3 pb-0 mb-0" style="margin-left: 5px;">
+                                <li class="mb-2">Minimum of 8 characters length</li>
+								<li class="mb-2">Maximum of 15 characters length</li>
+                                <li class="mb-2">At least one upper case letter</li>
+                                <li class="mb-2">At least one lower case letter</li>
+                                <li class="mb-2">At least one number</li>
+                                <li>At least one special character</li>
+                            </ul>
+                        </div>
+
+                        <!-- <div class="form-group px-0 py-0 d-flex align-items-center mt-1" *ngIf="isPWDNotMatch">
+                            <div class="col-12 d-flex px-0 alert alert-danger">
+                                <span class="pl-2">{{ isPWDNotMatch }}</span>
+                            </div>
+                        </div> -->
+                        <!-- <div>
+                        <span>{{passwordIncorrect}}</span>
+                    </div> -->
+                        <div class="form-group d-flex align-items-center justify-content-center mt-3 mb-0">
+                            <button class="btn btn-primary" [disabled]="disableNext()">Next</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-loader *ngIf="showAccountSetupLoader"></app-loader>
+</div>
+<!-- </p-dialog> -->
+
+<!-- <p-dialog header="Language Preference" [(visible)]="showLanguagePreference" styleClass="col-12 col-md-7 col-lg-6 col-xl-3 dialog no-header loginscreenlist" [focusOnShow]="false" [modal]="true" [minY]="70" (onHide)="showLanguagePreference = false" [closable]="false"
+    [blockScroll]="false" [resizable]="false" [draggable]="true" [responsive]="true" [baseZIndex]="10000" aria-label="language"> -->
+<div class="row mx-0 h-100 justify-conten-center align-items-center" *ngIf="showLanguagePreference" role="heading" aria-level="1">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-3 mx-auto">
+        <img src="./assets/images/consova_logo.png" class="d-block img-fluid mx-auto mb-4" alt="Consova">
+        <div class="sectionTopbar"></div>
+        <div class="sticky-section f-14">
+            <div class="formClass">
+                <h2 class="px-0 table-header f-20">Language Preference</h2>
+                <p class="table-header">Select from the options below to receive all of your Consova communications in your preferred language (Note that not all the languages are available) </p>
+                <div class="form-group">
+                    <!-- <div class="input-group mb-3"> -->
+                    <p-dropdown #ddlRelationship scrollHeight="230px" [options]="profileLanguageList" [placeholder]="'SelectLanguage' | translate: 'AccountView'" styleClass="form-control form-control-sm w-100" optionLabel="label" [(ngModel)]="selectedLang" (onShow)="utilityService.setDropDownPanelSize(ddlRelationship)"
+                        (onChange)="onPrefLanguageChanged($event)">
+                    </p-dropdown>
+                    <!-- </div> -->
+                </div>
+
+                <div class="form-group d-flex align-items-center justify-content-center mt-3 mb-0">
+                    <button class="btn btn-primary" (click)="languagePrefSubmit()">Submit</button>
+                </div>
+
+                <!-- <div class="d-flex align-items-center justify-content-center">
+                <span class="mt-4 forgot-link" (click)="loginNewUser()">Skip</span>
+            </div> -->
+            </div>
+        </div>
+    </div>
+    <app-loader *ngIf="showLanguagePreferenceLoader"></app-loader>
+</div>
+
+<!-- </p-dialog> -->
+
+
+<p-dialog header="Create Account" [(visible)]="showCreateAccountVideo" [modal]="true" styleClass="col-12 col-md-8 col-lg-8 col-sm-4 col-xl-8" [minY]="70" [baseZIndex]="100000" [focusOnShow]="false"
+    [closable]="true">
+    <video width="100%" controls>
+		<source src="../../../../assets/videos/CreatingAccount.mp4" type="video/mp4" alt="create Account">
+	</video>
+</p-dialog>
+
+<p-dialog header="Forgot Password OR Forgot Username" [(visible)]="showForgetPasswordVideo" [modal]="true" styleClass="col-12 col-md-8 col-lg-8 col-sm-4 col-xl-8" [minY]="70" [baseZIndex]="100000" [focusOnShow]="false"
+    [closable]="true">
+    <video width="100%" controls>
+		<source src="../../../../assets/videos/ForgotPasswordUsername.mp4" type="video/mp4">
+	</video>
+</p-dialog>
+
+<p-dialog header="Locating Your PIN" [(visible)]="showPINVideo" [modal]="true" styleClass="col-12 col-md-8 col-lg-8 col-sm-4 col-xl-8" [minY]="70" [baseZIndex]="100000" [focusOnShow]="false"
+    [closable]="true">
+    <video width="100%" controls>
+		<source src="../../../../assets/videos/LocatingYourPIN.mp4" type="video/mp4">
+	</video>
+</p-dialog>

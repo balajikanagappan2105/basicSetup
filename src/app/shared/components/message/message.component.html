@@ -1,0 +1,24 @@
+<p-dialog [header]="header" [(visible)]="visible" appendTo="body" [resizable]="false" [draggable]="false" [focusOnShow]="false" [modal]="true" [blockScroll]="true" [autoZIndex]="true" [styleClass]="styleClass" (onHide)="onModalMessageClose()" [showHeader]=false>
+
+	<div class="f-18 text-center col-12">
+		<div *ngIf="messageType=='success'">
+			<h2 class="mb-4 text-center" *ngIf="showIcon">{{'Done' | translate: 'GlobalContext'}}</h2>
+			<img src="./assets/images/ic_done.svg" width="72" class="d-block img-fluid mx-auto mb-4" alt="Done" *ngIf="showIcon">
+			<div [innerHTML]="message | secureByPass: 'html'"></div>
+		</div>
+
+		<div *ngIf="messageType=='error'">
+			<p *ngIf="showIcon"><img src="./assets/images/ic_error.svg" class="img-fluid" alt="Error"></p>
+			<div [innerHTML]="message | secureByPass: 'html'" class="text-danger"></div>
+		</div>
+
+		<p-footer>
+			<button type="button" class="btn mt-3" [ngClass]="buttonStyleClass" (click)="onModalMessageClose()">{{'OK' | translate: 'AccountView'}}</button>
+		</p-footer>
+	</div>
+
+	<!-- <div class="py-3 px-3 text-capitalize" [ngClass]="{'text-success': messageType=='success','text-danger': messageType=='error'}" [innerHTML]="message"></div>
+	<p-footer>
+		<button type="button" class="btn btn-primary py-1 f-14" (click)="onModalMessageClose()">OK</button>
+	</p-footer> -->
+</p-dialog>

@@ -1,0 +1,37 @@
+p {
+	font-size: 16px;
+	line-height: 18px;
+	color: #212529;
+
+	.emailLabel {
+		font-size: 14px;
+		line-height: 18px;
+		font-weight: bold;
+		letter-spacing: 0.34px;
+		color: #02c58d;
+	}
+
+	.dateStyle {
+		color: #9ca8b3;
+		font-size: 14px;
+		line-height: 18px;
+		letter-spacing: 0;
+	}
+}
+
+.subjectStyle {
+	border: 1px solid #a6acc166;
+	padding: 10px 0;
+	border-width: 1px 0;
+	margin: 24px 0 20px 0;
+}
+
+.no-print {
+	display: none !important;
+}
+
+@media print {
+	.no-print {
+		display: none !important;
+	}
+}

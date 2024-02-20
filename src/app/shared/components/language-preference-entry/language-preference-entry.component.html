@@ -1,0 +1,85 @@
+<!-- <p-dialog header="Language Preference" [(visible)]="showLanguagePreference" styleClass="col-12 col-md-7 col-lg-6 col-xl-3 dialog no-header loginscreenlist" [focusOnShow]="false" [modal]="true" [minY]="70" (onHide)="showLanguagePreference = false" [closable]="false"
+    [blockScroll]="false" [resizable]="false" [draggable]="true" [responsive]="true" [baseZIndex]="10000" aria-label="language"> -->
+<div class="row mx-0 h-100 justify-conten-center align-items-center" *ngIf="showLoginPage" role="heading" aria-level="1">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-3 mx-auto">
+        <img src="./assets/images/consova_logo.png" class="d-block img-fluid mx-auto mb-4" alt="Consova">
+        <div class="sectionTopbar"></div>
+        <div class="sticky-section pt-4">
+            <div class="formClass">
+                <h2 class="px-0 table-header f-20">Language Preference</h2>
+                <p class="table-header">Select from the options below to receive all of your Consova communications in your preferred language (Note that not all the languages are available) </p>
+                <div class="form-group">
+                    <!-- <div class="input-group mb-3"> -->
+                    <p-dropdown #ddlRelationship scrollHeight="230px" [options]="profileLanguageList" [placeholder]="'SelectLanguage' | translate: 'AccountView'" styleClass="form-control form-control-sm w-100" optionLabel="label" [(ngModel)]="selectedLang" (onShow)="utilityService.setDropDownPanelSize(ddlRelationship)"
+                        (onChange)="onPrefLanguageChanged($event)">
+                    </p-dropdown>
+                    <!-- </div> -->
+                </div>
+
+                <div class="form-group d-flex align-items-center justify-content-center mt-3">
+                    <button class="btn btn-primary" (click)="languagePrefSubmit()">Submit</button>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-center">
+                    <span class="mt-4 forgot-link" (click)="loginNewUser()">Skip</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- </p-dialog> -->
+
+
+
+
+
+<p-dialog header="Authentication" styleClass="col-lg-3 col-md-6 col-sm-6 col-12" [(visible)]="modalMessageUser.Visibility" [modal]="true" [blockScroll]="true" [resizable]="false" [draggable]="false" [responsive]="true" [focusOnShow]="false" [minY]="70"
+    [baseZIndex]="10000" [closable]="false">
+    <div class="sticky-section f-18 text-center">
+        <div *ngIf="modalMessageUser.CSSClass == 'text-danger'">
+            <p><img src="./assets/images/ic_error.svg" class="img-fluid" alt="Passcode"></p>
+            <div [innerHTML]="modalMessageUser.Message" class="text-danger mb-3 py-3"></div>
+        </div>
+
+        <div class="text-center">
+            <button type="button" class="btn btn-primary f-20 py-2" (click)="closeAuthUser(); returndataentrypage()">OK</button>
+        </div>
+    </div>
+</p-dialog>
+
+<p-dialog header="Authentication" styleClass="col-lg-3 col-md-6 col-sm-6 col-12 dialog no-header loginscreenlist" [(visible)]="modalMessageRestPwd.Visibility" [modal]="true" [blockScroll]="true" [resizable]="false" [draggable]="false" [responsive]="true"
+    [focusOnShow]="false" [minY]="70" [baseZIndex]="10000" [closable]="false">
+    <div class="sticky-section f-18 text-center">
+        <div *ngIf="modalMessageRestPwd.CSSClass == 'text-danger'">
+            <p><img src="./assets/images/ic_error.svg" class="img-fluid" alt="Passcode"></p>
+            <div [innerHTML]="modalMessageRestPwd.Message" class="text-danger mb-3 py-3"></div>
+        </div>
+
+        <div class="text-center">
+            <button type="button" class="btn btn-primary f-20 py-2" (click)="closeAuthResetPwd();">OK</button>
+        </div>
+    </div>
+</p-dialog>
+
+<app-loader *ngIf="showLoader || !showLoginPage"></app-loader>
+
+
+<p-dialog header="Authentication" styleClass="col-lg-3 col-md-6 col-sm-6 col-12" [(visible)]="modalMessage.Visibility" [modal]="true" [blockScroll]="true" [resizable]="false" [draggable]="false" [responsive]="true" [focusOnShow]="false" [minY]="70" [baseZIndex]="10000"
+    [closable]="false">
+    <div class="sticky-section f-18 text-center">
+        <div *ngIf="modalMessage.CSSClass == 'text-danger'">
+            <p><img src="./assets/images/ic_error.svg" class="img-fluid" alt="Passcode"></p>
+            <div [innerHTML]="modalMessage.Message" class="text-danger mb-3 py-3" [ngClass]="modalMessage.CSSClass"></div>
+        </div>
+
+        <div class="text-center">
+            <button type="button" class="btn btn-primary f-20 py-2" (click)="returnsign()">Return to Sign In</button>
+        </div>
+    </div>
+
+    <!-- <div class="py-3 px-3" [ngClass]="modalMessage.CSSClass" [innerHTML]="modalMessage.Message"></div>
+<p-footer>
+		<button type="button" class="btn btn-primary py-1 f-14" style="min-width: auto;" (click)="modalMessage.Visibility = false">OK</button>
+</p-footer> -->
+</p-dialog>

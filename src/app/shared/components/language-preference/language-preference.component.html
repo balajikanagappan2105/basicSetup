@@ -1,0 +1,34 @@
+<div *ngIf="!showButton && languageList?.length > 1">
+    <select class="form-control language-select" [(ngModel)]="profileLanguage" (change)="onProfileLanguageChanged()">
+		<option *ngFor="let lang of languageList" [value]="lang?.LanguageTypeId">
+			{{lang?.LanguageType?.Name}}</option>
+	</select>
+</div>
+
+<div *ngIf="(isFromProfile && showButton) && (profileLanguageList && profileLanguageList.length > 1)" role="region" aria-label="language">
+    <h5 class="profile-title d-flex justify-content-between align-items-center">{{'LanguagePreference' | translate: 'AccountView'}}
+        <button *ngIf="selectedLang && (selectedLang?.value != employeePreferredLanguage)" class="btn btn-outline-primary mw-90px f-14" (click)="changeSelectedLang()">{{'ActivateButton' | translate: 'AccountView'}}</button>
+    </h5>
+
+    <p class="profile-subtitle mb-3" *ngIf="profileLanguageList && profileLanguageList.length > 1">
+        <span [innerHTML]="'LanguagePreferenceDescription' | translate: 'AccountView' | secureByPass: 'html'"></span>
+    </p>
+
+    <div class="col-12 col-md-3 col-lg-2 px-0" *ngIf="profileLanguageList && profileLanguageList.length > 1">
+        <div class="form-group">
+            <label class="form-label mb-2">{{'Language' | translate: 'AccountView'}}</label>
+            <!-- <select class="form-control form-control-sm language-dropdown" #language=ngModel [(ngModel)]="selectedLanguage" (change)="onPrefLanguageChanged()" style="width: 100% !important;">
+				<option value="0" hidden>Select Language</option>
+				<option *ngFor="let lang of translateServicePref.languageList" [value]="lang?.LanguageTypeId">
+					{{lang?.LanguageType?.Name}}</option>
+			</select> -->
+            <p-dropdown *ngIf="profileLanguageList.length > 0" #ddlRelationship scrollHeight="230px" [options]="profileLanguageList" [placeholder]="'SelectLanguage' | translate: 'AccountView'" styleClass="form-control form-control-sm w-100" optionLabel="label" [(ngModel)]="selectedLang"
+                (onChange)="onPrefLanguageChanged()" (onShow)="appUtilityService.setDropDownPanelSize(ddlRelationship)">
+            </p-dropdown>
+        </div>
+    </div>
+</div>
+
+<app-loader *ngIf="showLoader && showButton"></app-loader>
+
+<app-message [message]="messageHolder.message" [messageType]="messageHolder.messageType" [visible]="messageHolder.visible" header="Message" (onClose)="hideMessage()"></app-message>

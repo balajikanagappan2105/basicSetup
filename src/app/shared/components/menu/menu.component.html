@@ -1,0 +1,66 @@
+<nav id="sidebar" class="active">
+    <a class="sidebar-header" href="/" onclick="return false;" target="_blank" title="Consova"></a>
+    <span class="close" (click)="closeSidebar()"><img src="./assets/images/ic_menu_hamberger_close.svg" class="img-fluid" alt=""></span>
+
+    <ul class="list-unstyled menu-lists">
+
+        <li class="list-group-item list-group-item-action menu-item" (click)="closeSidebar()" [routerLink]="['/dashboard']" routerLinkActive="active-link">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+                <span class="menu_icon dashboard_icon"></span>
+                <span class="menu-collapsed menu-animate-left">{{'Dashboard' | translate: 'Menu'}}</span>
+            </div>
+        </li>
+
+        <li class="list-group-item list-group-item-action menu-item" (click)="closeSidebar()" [routerLink]="['/account']" routerLinkActive="active-link">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+                <span class="menu_icon admin_ticket_icon"></span>
+                <span class="menu-collapsed menu-animate-left">{{'VerificationHistory' | translate: 'Menu'}}</span>
+            </div>
+        </li>
+
+        <li class="list-group-item list-group-item-action menu-item" (click)="closeSidebar();externalLink('KnowledgeCenter')">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+                <span class="menu_icon knowledge_center_icon"></span>
+                <span class="menu-collapsed menu-animate-left">{{'KnowledgeCenter' | translate: 'Menu'}}</span>
+            </div>
+        </li>
+
+        <hr>
+
+        <li class="list-group-item list-group-item-action menu-item" (click)="closeSidebar()" [routerLink]="['/contact']" routerLinkActive="active-link">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+                <span class="menu_icon contact_icon"></span>
+                <span class="menu-collapsed menu-animate-left">{{'Contact' | translate: 'Menu'}}</span>
+            </div>
+        </li>
+
+        <li class="list-group-item list-group-item-action menu-item" (click)="closeSidebar()" target="_blank" [routerLink]="['/privacypolicy']" routerLinkActive="active-link">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+                <span class="menu_icon privacy_policy_icon"></span>
+                <span class="menu-collapsed menu-animate-left">{{'PrivacyPolicy' | translate: 'Menu'}}</span>
+            </div>
+        </li>
+
+        <!-- <li class="list-group-item list-group-item-action menu-item" (click)="closeSidebar()" [routerLink]="['/faq']" routerLinkActive="active-link">
+			<div class="d-flex w-100 justify-content-start align-items-center">
+				<span class="menu_icon faq_icon"></span>
+				<span class="menu-collapsed menu-animate-left">{{'FAQ' | translate: 'Menu'}}</span>
+			</div>
+		</li> -->
+
+        <li class="list-group-item list-group-item-action menu-item d-sm-none" (click)="closeSidebar()" [routerLink]="['/profile']" routerLinkActive="active-link">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+                <span class="menu_icon user_icon"></span>
+                <span class="menu-collapsed menu-animate-left">{{'Profile' | translate: 'TopBar'}}</span>
+            </div>
+        </li>
+        <li class="list-group-item list-group-item-action menu-item cursor-pointer" (click)="logout()">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+                <span class="menu_icon logout_icon"></span>
+                <span class="menu-collapsed menu-animate-left">{{'Logout' | translate: 'Menu'}}</span>
+            </div>
+        </li>
+    </ul>
+</nav>
+
+<div class="back-layer" (click)="closeSidebar()"></div>

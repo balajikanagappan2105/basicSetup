@@ -1,0 +1,59 @@
+.privacyPolicy {
+	background: #ffffff !important;
+	padding: 25px;
+}
+
+.privacyTxt {
+	text-align: justify;
+}
+
+.avatar {
+	text-align: center;
+	padding: 15px;
+}
+
+.privacyTopHeader {
+	font-size: 20px;
+	letter-spacing: 0.56px;
+	color: #213064;
+	text-align: left;
+}
+
+.privacyContent {
+	text-align: left;
+	font-size: 14px;
+	letter-spacing: 0.36px;
+}
+
+.nav-pills .nav-link {
+	letter-spacing: 0.39px;
+	color: #213064 !important;
+	background-color: #ffffff !important;
+	font-size: 14px;
+	text-align: left;
+
+	&.active,
+	&:hover,
+	&:focus {
+		outline: none;
+		box-shadow: none;
+		text-decoration: underline !important;
+	}
+}
+
+.pillsContent {
+	text-align: left;
+	font-size: 14px;
+	letter-spacing: 0.36px;
+	color: #212529;
+
+	@media (max-width: 768px) {
+		ul {
+			padding-left: 10px;
+			list-style-position: inside;
+		}
+	}
+	li + li {
+		margin-top: 24px;
+	}
+}

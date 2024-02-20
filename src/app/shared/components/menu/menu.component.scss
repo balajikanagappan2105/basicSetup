@@ -1,0 +1,448 @@
+$menuBG: #f2f3f6;
+$menuFontColor: #213064;
+$menuExpandedWith: 315px;
+
+#sidebar {
+	min-width: $menuExpandedWith - 40;
+	max-width: $menuExpandedWith;
+	background: $menuBG;
+	color: $menuFontColor;
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+	// height: calc(100vh - 60px);
+	height: 100%;
+	text-align: right;
+
+	span {
+		cursor: pointer;
+	}
+	.close {
+		display: none;
+	}
+
+	.sidebar-header {
+		padding: 10px 5px;
+		width: 100%;
+		height: 70px;
+		box-shadow: 0px 0px 6px #0000000f;
+		background-color: #1a2650;
+		background-image: url("../../../../assets/images/consova_logo_white.svg");
+		background-position: center center;
+		background-repeat: no-repeat;
+		cursor: pointer;
+		display: block;
+		transition: background-image 1s;
+
+		// #sidebarCollapse {
+		// 	cursor: pointer;
+		// 	font-size: 18px;
+		// 	padding: 5px 5px;
+		// 	background: #ffffff;
+		// 	border-radius: 32px;
+		// 	color: #003d6c;
+		// 	height: 35px;
+		// 	width: 35px;
+		// 	margin-right: -21px;
+		// 	z-index: 1;
+		// 	position: relative;
+		// 	transition-property: margin-right;
+		// 	transition-duration: 2s;
+		// 	transition-timing-function: linear;
+		// 	transition-delay: 1s;
+
+		// 	.close {
+		// 		display: inline-block;
+		// 		color: #003d6c;
+		// 		text-shadow: none;
+		// 		opacity: 1;
+		// 	}
+
+		// 	.open {
+		// 		display: none;
+		// 	}
+		// }
+		@media (max-width: 767px) {
+			// pointer-events: none;
+			// touch-action: none;
+			transition: none !important;
+		}
+	}
+
+	.menu-lists {
+		border: 1px solid #d9dee2;
+		height: 100%;
+
+		.menu-item {
+			text-align: left;
+			color: $menuFontColor !important;
+			background-color: transparent !important;
+			font-weight: 100;
+			font-size: 14px;
+			line-height: 18px;
+			padding: 15px 10px !important;
+			border-radius: 0 !important;
+			border: 0;
+			border-right: 3px solid transparent !important;
+
+			&[aria-expanded="false"] {
+				.menu-collapsed {
+					width: 100%;
+					text-align: left;
+
+					&:after {
+						font-family: "FontAwesome";
+						content: "\f078";
+						float: right;
+						font-size: 11px;
+						font-weight: normal;
+					}
+				}
+			}
+
+			&[aria-expanded="true"] {
+				background-color: $menuBG !important;
+				width: 100%;
+				z-index: 1;
+
+				.menu-item {
+					background-color: $menuBG !important;
+					z-index: 1;
+				}
+
+				.menu-collapsed {
+					display: block;
+					width: 100%;
+					text-align: left;
+
+					&:after {
+						font-family: "FontAwesome";
+						content: "\f077";
+						float: right;
+						font-size: 11px;
+						font-weight: normal;
+					}
+				}
+
+				.menu-animate-left {
+					position: relative;
+					animation: animateleft 0.2s;
+				}
+			}
+
+			&.active-link,
+			&:hover,
+			&:focus {
+				border-right: 3px solid #02c58d !important;
+				color: #02c58d !important;
+
+				.dashboard_icon {
+					background-image: url("../../../../assets/images/ic_dashboard_active.svg");
+				}
+
+				.admin_ticket_icon {
+					background-image: url("../../../../assets/images/ic_admin_ticket_active.svg");
+				}
+
+				.knowledge_center_icon {
+					background-image: url("../../../../assets/images/ic_knowladge_centre_active.svg");
+				}
+
+				.contact_icon {
+					background-image: url("../../../../assets/images/ic_contact_active.svg");
+				}
+
+				.faq_icon {
+					background-image: url("../../../../assets/images/ic_faq_active.svg");
+				}
+
+				.privacy_policy_icon {
+					background-image: url("../../../../assets/images/ic_privacy_policy_active.svg");
+				}
+
+				.user_icon {
+					background-image: url("../../../../assets/images/ic_user_active.svg");
+				}
+
+				.logout_icon {
+					background-image: url("../../../../assets/images/ic_logout_active.svg");
+				}
+			}
+
+			.menu_icon {
+				width: 24px;
+				height: 24px;
+				margin-right: 20px;
+				background-position: center center;
+				background-repeat: no-repeat;
+				transition: background-image 1s;
+			}
+
+			.dashboard_icon {
+				background-image: url("../../../../assets/images/ic_dashboard.svg");
+			}
+
+			.admin_ticket_icon {
+				background-image: url("../../../../assets/images/ic_admin_ticket.svg");
+			}
+
+			.knowledge_center_icon {
+				background-image: url("../../../../assets/images/ic_knowladge_centre.svg");
+			}
+
+			.contact_icon {
+				background-image: url("../../../../assets/images/ic_contact.svg");
+			}
+
+			.faq_icon {
+				background-image: url("../../../../assets/images/ic_faq.svg");
+			}
+
+			.privacy_policy_icon {
+				background-image: url("../../../../assets/images/ic_privacy_policy.svg");
+			}
+
+			.user_icon {
+				background-image: url("../../../../assets/images/ic_user.svg");
+			}
+
+			.logout_icon {
+				background-image: url("../../../../assets/images/ic_logout.svg");
+			}
+
+			.menu-animate-left {
+				position: relative;
+				animation: animateleft 0.5s;
+				letter-spacing: 1.5px;
+				text-transform: uppercase;
+				font-weight: 600;
+			}
+		}
+
+		.submenu1,
+		.submenu2 {
+			.menu-animate-left {
+				letter-spacing: 1px;
+				text-transform: none;
+				margin-left: 0px !important;
+			}
+
+			.menu_icon {
+				margin-right: 5px !important;
+			}
+
+			margin-left: 40px;
+		}
+
+		.submenu1 {
+			.menu-animate-left {
+				font-weight: 600;
+			}
+		}
+
+		.submenu2 {
+			margin-left: 30px;
+
+			.menu-animate-left {
+				font-weight: normal;
+			}
+		}
+	}
+
+	&.active {
+		min-width: 50px;
+		max-width: 50px;
+		text-align: center;
+
+		.sidebar-header {
+			background-image: url("../../../../assets/images/consova_sidemenu_logo.svg");
+		}
+
+		.menu-lists {
+			.menu-item {
+				// padding: 20px 10px;
+				text-align: center;
+				background-color: transparent !important;
+				border-radius: 0 !important;
+
+				.menu_icon {
+					margin-right: 0%;
+				}
+
+				&[aria-expanded="false"] {
+					.menu-collapsed {
+						width: 100%;
+						text-align: left;
+					}
+				}
+
+				&[aria-expanded="true"] {
+					background-color: $menuBG !important;
+					width: $menuExpandedWith;
+					z-index: 1;
+
+					.menu-item {
+						background-color: $menuBG !important;
+						z-index: 1;
+					}
+
+					.menu-collapsed {
+						display: block;
+						margin-left: 10px;
+						width: 100%;
+						text-align: left;
+					}
+
+					.menu-animate-left {
+						position: relative;
+						animation: animateleft 0.2s;
+					}
+				}
+
+				~ .collapse {
+					&.show {
+						background-color: $menuBG !important;
+						width: $menuExpandedWith;
+
+						.menu-item {
+							background-color: $menuBG !important;
+							z-index: 1;
+
+							&.active-link {
+								// background-color: #ffffff !important;
+								color: #02c58d !important;
+							}
+						}
+
+						.menu-collapsed {
+							display: block;
+							margin-left: 10px;
+						}
+
+						.menu-animate-left {
+							position: relative;
+							animation: animateleft 0.2s;
+						}
+					}
+				}
+
+				@media screen and (min-width: 769px) {
+					&:hover {
+						background-color: $menuBG !important;
+						width: $menuExpandedWith;
+						z-index: 11;
+
+						.menu-collapsed {
+							display: block;
+							margin-left: 10px;
+						}
+
+						.menu-animate-left {
+							position: relative;
+							animation: animateleft 0.2s;
+						}
+					}
+				}
+
+				.fa {
+					margin-right: 0 !important;
+					display: block;
+					font-size: 18px;
+				}
+
+				.menu-collapsed {
+					display: none;
+				}
+			}
+		}
+	}
+}
+
+.menu-animate-left {
+	position: relative;
+	animation: animateleft 0.2s;
+}
+
+@keyframes animateleft {
+	from {
+		left: -100px;
+		opacity: 0;
+	}
+
+	to {
+		left: 0;
+		opacity: 1;
+	}
+}
+
+@media (max-width: 767px) {
+	/* Reappearing the sidebar on toggle button click */
+
+	#sidebar {
+		margin-left: 0;
+		width: 100%;
+		position: fixed;
+		z-index: 100;
+		.close {
+			display: block;
+			position: absolute;
+			top: 23px;
+			right: 5px;
+		}
+
+		&.active {
+			min-width: 0;
+			width: 0;
+			max-width: 0;
+
+			.close {
+				display: none;
+			}
+
+			.sidebar-header {
+				color: $menuBG;
+				z-index: 100;
+				// width: 45px !important;
+				width: 0px !important;
+				padding: 0;
+			}
+
+			.menu-lists {
+				.menu-item {
+					position: inherit;
+					display: none;
+				}
+			}
+		}
+	}
+}
+
+.back-layer {
+	display: none;
+
+	@media screen and (max-width: 767px) {
+		&.visible {
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			width: 100%;
+			background-color: #0c0c0c00;
+			height: 100vh;
+			z-index: 5;
+			display: block;
+		}
+	}
+}
+
+hr {
+	margin-bottom: 54px;
+	width: 75%;
+	margin-top: 26px;
+	border-top: 1px solid #213064;
+	opacity: 0.1;
+}

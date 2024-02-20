@@ -1,0 +1,134 @@
+<!-- <p-dialog header="Account Setup" [(visible)]="showAccountSetup" styleClass="col-12 col-md-7 col-lg-6 col-xl-3 dialog no-header loginscreenlist" [focusOnShow]="false" [modal]="true" [minY]="70" (onHide)="showAccountSetup = false" [closable]="false" [blockScroll]="false"
+    [resizable]="false" [draggable]="true" [responsive]="true" [baseZIndex]="10000"> -->
+<div class="row mx-0 h-100 justify-conten-center align-items-center" *ngIf="showLoginPage" role="heading" aria-level="1">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-3 mx-auto">
+        <img src="./assets/images/consova_logo.png" class="d-block img-fluid mx-auto mb-4" alt="Consova">
+        <div class="sectionTopbar"></div>
+        <div class="sticky-section pt-4">
+            <div class="formClass">
+                <h2 class="px-1 mb-4">Account Setup</h2>
+
+                <div class="form-group py-0" *ngIf="accounterrormessage">
+                    <div class="col-12 d-flex px-0 alert py-0">
+                        <!-- <span  *ngIf="emailsuccessmessage" class="pl-2 text-success">{{ emailsuccessmessage }}</span> -->
+                        <span *ngIf="accounterrormessage" class="pl-2 text-danger">{{ accounterrormessage }}</span>
+                    </div>
+                </div>
+
+                <div class="container px-1">
+                    <form [formGroup]="loginFormaccountsetup" (ngSubmit)="createAccount()" autocomplete="off">
+
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                </div>
+                                <input type="text" id="username" class="input form-control" formControlName="Username" placeholder="Enter Email (UserName)" maxlength="255" autocomplete="off" autofocus>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+								<img src="./assets/images/ic_password_input_field.svg" alt="Password">
+							</span>
+                                </div>
+                                <input type="password" class="form-control" maxlength="255" formControlName="Password" autofocus pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" autocomplete="new-password" placeholder="Enter Password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+								<img src="./assets/images/ic_password_input_field.svg" alt="Password">
+							</span>
+                                </div>
+                                <input type="password" class="form-control" maxlength="255" formControlName="ConfirmPassword" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" autocomplete="new-password" placeholder="Confirm Password">
+                            </div>
+                        </div>
+                        <div class="row px-3 py-0 d-flex align-items-center mt-1">
+                            <p class="pb-0 mb-2"><strong>Your password must include each of the following:</strong></p>
+                            <!-- </div>
+            <div class="row px-0 py-0 d-flex align-items-center mb-2"> -->
+                            <ul class="px-3 pb-0 mb-0" style="margin-left: 5px;">
+                                <li class="mb-2">Minimum of 8 characters length</li>
+								<li class="mb-2">Maximum of 15 characters length</li>
+                                <li class="mb-2">At least one upper case letter</li>
+                                <li class="mb-2">At least one lower case letter</li>
+                                <li class="mb-2">At least one number</li>
+                                <li>At least one special character</li>
+                            </ul>
+                        </div>
+
+                        <!-- <div class="form-group mt-2" *ngIf="passwordIncorrect">
+                        <div class="col-12 d-flex px-0 alert alert-danger">
+                            <span class="pl-2">{{ passwordIncorrect }}</span>
+                        </div>
+                    </div> -->
+                        <!-- <div>
+                        <span>{{passwordIncorrect}}</span>
+                    </div> -->
+                        <div class="form-group d-flex align-items-center justify-content-center mt-3 mb-0">
+                            <button class="btn btn-primary" [disabled]="loginFormaccountsetup.invalid">Next</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-loader *ngIf="showAccountSetupLoader"></app-loader>
+<!-- </p-dialog> -->
+
+
+
+<p-dialog header="Authentication" styleClass="col-lg-3 col-md-6 col-sm-6 col-12" [(visible)]="modalMessageUser.Visibility" [modal]="true" [blockScroll]="true" [resizable]="false" [draggable]="false" [responsive]="true" [focusOnShow]="false" [minY]="70"
+    [baseZIndex]="10000" [closable]="false">
+    <div class="sticky-section f-18 text-center">
+        <div *ngIf="modalMessageUser.CSSClass == 'text-danger'">
+            <p><img src="./assets/images/ic_error.svg" class="img-fluid" alt="Passcode"></p>
+            <div [innerHTML]="modalMessageUser.Message" class="text-danger mb-3 py-3"></div>
+        </div>
+
+        <div class="text-center">
+            <button type="button" class="btn btn-primary f-20 py-2" (click)="closeAuthUser(); returndataentrypage()">OK</button>
+        </div>
+    </div>
+</p-dialog>
+
+<p-dialog header="Authentication" styleClass="col-lg-3 col-md-6 col-sm-6 col-12 dialog no-header loginscreenlist" [(visible)]="modalMessageRestPwd.Visibility" [modal]="true" [blockScroll]="true" [resizable]="false" [draggable]="false" [responsive]="true"
+    [focusOnShow]="false" [minY]="70" [baseZIndex]="10000" [closable]="false">
+    <div class="sticky-section f-18 text-center">
+        <div *ngIf="modalMessageRestPwd.CSSClass == 'text-danger'">
+            <p><img src="./assets/images/ic_error.svg" class="img-fluid" alt="Passcode"></p>
+            <div [innerHTML]="modalMessageRestPwd.Message" class="text-danger mb-3 py-3"></div>
+        </div>
+
+        <div class="text-center">
+            <button type="button" class="btn btn-primary f-20 py-2" (click)="closeAuthResetPwd();">OK</button>
+        </div>
+    </div>
+</p-dialog>
+
+<app-loader *ngIf="showLoader || !showLoginPage"></app-loader>
+
+
+<p-dialog header="Authentication" styleClass="col-lg-3 col-md-6 col-sm-6 col-12" [(visible)]="modalMessage.Visibility" [modal]="true" [blockScroll]="true" [resizable]="false" [draggable]="false" [responsive]="true" [focusOnShow]="false" [minY]="70" [baseZIndex]="10000"
+    [closable]="false">
+    <div class="sticky-section f-18 text-center">
+        <div *ngIf="modalMessage.CSSClass == 'text-danger'">
+            <p><img src="./assets/images/ic_error.svg" class="img-fluid" alt="Passcode"></p>
+            <div [innerHTML]="modalMessage.Message" class="text-danger mb-3 py-3" [ngClass]="modalMessage.CSSClass"></div>
+        </div>
+
+        <div class="text-center">
+            <button type="button" class="btn btn-primary f-20 py-2" (click)="returnsign()">Return to Sign In</button>
+        </div>
+    </div>
+
+    <!-- <div class="py-3 px-3" [ngClass]="modalMessage.CSSClass" [innerHTML]="modalMessage.Message"></div>
+    <p-footer>
+        <button type="button" class="btn btn-primary py-1 f-14" style="min-width: auto;" (click)="modalMessage.Visibility = false">OK</button>
+    </p-footer> -->
+</p-dialog>

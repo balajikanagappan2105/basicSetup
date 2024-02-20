@@ -1,0 +1,106 @@
+<!-- <p-dialog header="Account Creation" styleClass="col-lg-3 col-md-6 col-sm-6 col-12 dialog no-header loginscreenlist" [(visible)]="showFirstTimeRegister" [modal]="true" [blockScroll]="true" [resizable]="false" [draggable]="true" [responsive]="true" [focusOnShow]="false"
+    [minY]="70" [baseZIndex]="10000" [closable]="false"> -->
+<!-- <div class="sectionTopbar"></div> -->
+<div class="row mx-0 h-100 justify-conten-center align-items-center" role="heading" aria-level="1">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-3 mx-auto">
+        <img src="./assets/images/consova_logo.png" class="d-block img-fluid mx-auto mb-4" alt="Consova">
+        <div class="sectionTopbar"></div>
+        <div class="sticky-section pt-4 app-user">
+            <h2 class="mb-4" role="region" aria-label="heading">Account Creation</h2>
+
+            <form [formGroup]="loginFormregister" (ngSubmit)="onSubmitUser()" autocomplete="off">
+
+                <div class="form-group">
+                    <!-- <label for="LastName">{{'Lastname' | translate: 'Login'}}</label> -->
+                    <div class="input-group mb-3">
+                        <input type="text" id="LastName" class="input form-control" pInputText [placeholder]="'Lastname' | translate: 'Login'" formControlName="LastName" autofocus autocomplete="off">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-info-circle fa-lg cursor-pointer" pTooltip="Enter your last name as it appears on the letter or email you received from Consova." [tooltipZIndex]="100000"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <!-- <label for="ConsovaPIN">{{'ConsovaPIN' | translate: 'Login'}}</label> -->
+                    <div class="input-group mb-3">
+                        <input type="password" id="ConsovaPIN" class="input form-control" pInputText pKeyFilter="pnum" [placeholder]="'ConsovaPIN' | translate: 'Login'" formControlName="ConsovaPIN" autocomplete="off">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-info-circle fa-lg cursor-pointer" pTooltip="Enter the PIN found in the letter or email you received from Consova." [tooltipZIndex]="100000"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <!-- <label for="EmployeeSSN">{{'EmployeeSSN' | translate: 'Login'}}</label> -->
+                    <div class="input-group mb-3">
+                        <input type="password" id="EmployeeSSN" class="input form-control" pInputText pKeyFilter="pnum" [placeholder]="'EmployeeSSN' | translate: 'Login'" formControlName="EmployeeSSN" maxlength="4" autocomplete="off">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-info-circle fa-lg cursor-pointer" pTooltip="Enter the last 4 digits of your Social Security Number." [tooltipZIndex]="100000"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-block f-20 py-2" [disabled]="loginFormregister.invalid">{{'Submit' | translate: 'Contact'}}</button>
+                        <!-- <button type="submit" class="btn btn-primary btn-block f-20 py-2" (click)="showDataEntry()">data entry</button> -->
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<app-loader *ngIf="showAccountCreationLoader"></app-loader>
+<!-- </p-dialog> -->
+
+
+<p-dialog header="Authentication" styleClass="col-lg-3 col-md-6 col-sm-6 col-12" [(visible)]="modalMessageUser.Visibility" [modal]="true" [blockScroll]="true" [resizable]="false" [draggable]="false" [responsive]="true" [focusOnShow]="false" [minY]="70"
+    [baseZIndex]="10000" [closable]="false">
+    <div class="sticky-section f-18 text-center">
+        <div *ngIf="modalMessageUser.CSSClass == 'text-danger'">
+            <p><img src="./assets/images/ic_error.svg" class="img-fluid" alt="Passcode"></p>
+            <div [innerHTML]="modalMessageUser.Message" class="text-danger mb-3 py-3"></div>
+        </div>
+
+        <div class="text-center">
+            <button type="button" class="btn btn-primary f-20 py-2" (click)="closeAuthUser(); returndataentrypage()">OK</button>
+        </div>
+    </div>
+</p-dialog>
+
+<!-- <p-dialog header="Authentication" styleClass="col-lg-3 col-md-6 col-sm-6 col-12 dialog no-header loginscreenlist" [(visible)]="modalMessageRestPwd.Visibility" [modal]="true" [blockScroll]="true" [resizable]="false" [draggable]="false" [responsive]="true"
+    [focusOnShow]="false" [minY]="70" [baseZIndex]="10000" [closable]="false">
+    <div class="sticky-section f-18 text-center">
+        <div *ngIf="modalMessageRestPwd.CSSClass == 'text-danger'">
+            <p><img src="./assets/images/ic_error.svg" class="img-fluid" alt="Passcode"></p>
+            <div [innerHTML]="modalMessageRestPwd.Message" class="text-danger mb-3 py-3"></div>
+        </div>
+
+        <div class="text-center">
+            <button type="button" class="btn btn-primary f-20 py-2" (click)="closeAuthResetPwd();">OK</button>
+        </div>
+    </div>
+</p-dialog> -->
+
+<!-- <app-loader *ngIf="showLoader || !showLoginPage"></app-loader> -->
+
+
+<p-dialog header="Authentication" styleClass="col-lg-3 col-md-6 col-sm-6 col-12" [(visible)]="modalMessage.Visibility" [modal]="true" [blockScroll]="true" [resizable]="false" [draggable]="false" [responsive]="true" [focusOnShow]="false" [minY]="70" [baseZIndex]="10000"
+    [closable]="false">
+    <div class="sticky-section f-18 text-center">
+        <div *ngIf="modalMessage.CSSClass == 'text-danger'">
+            <p><img src="./assets/images/ic_error.svg" class="img-fluid" alt="Passcode"></p>
+            <div [innerHTML]="modalMessage.Message" class="text-danger mb-3 py-3" [ngClass]="modalMessage.CSSClass"></div>
+        </div>
+
+        <div class="text-center">
+            <button type="button" class="btn btn-primary f-20 py-2" (click)="returnsign()">Return to Sign In</button>
+        </div>
+    </div>
+
+    <!-- <div class="py-3 px-3" [ngClass]="modalMessage.CSSClass" [innerHTML]="modalMessage.Message"></div>
+    <p-footer>
+        <button type="button" class="btn btn-primary py-1 f-14" style="min-width: auto;" (click)="modalMessage.Visibility = false">OK</button>
+    </p-footer> -->
+</p-dialog>
